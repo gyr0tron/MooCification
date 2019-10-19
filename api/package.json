@@ -1,0 +1,20 @@
+{
+  "name": "moocificiation-api",
+  "version": "1.0.0",
+  "description": "lets make MooCs fun again",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nurdtechie98/MooCification.git/api"
+  },
+  "keywords": [
+    "MooC",
+    "blockchain",
+    "gamification"
+  ],
+  "author": "nurdtechie98",
+  "license": "ISC"
+}
