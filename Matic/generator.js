@@ -1,5 +1,5 @@
 import web3 from "./web3";
-import compiledGenerator from "./build/GenerateBill.json";
+import compiledGenerator from "./build/MoocToken.json";
 import keys from "../.env";
 
 const abi = compiledGenerator.abi;
