@@ -1,0 +1,28 @@
+{
+  "name": "moocification",
+  "version": "1.0.0",
+  "description": "Lets Make MooCs FUN Again",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ganache-cli": "^6.7.0",
+    "fs-extra": "^8.1.0",
+    "solc": "^0.5.5",
+    "truffle-hdwallet-provider": "^1.0.5",
+    "web3": "^1.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nurdtechie98/MooCification.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nurdtechie98/MooCification/issues"
+  },
+  "homepage": "https://github.com/nurdtechie98/MooCification#readme"
+}
