@@ -1,0 +1,18 @@
+{
+    "manifest_version": 2,
+    "name": "MooCification",
+    "version": "1.0",
+    "content_scripts": [
+      {
+        "matches": [
+          "https://www.udemy.com/course/*/learn/*"
+        ],
+        "js": ["content.js"]
+      }
+    ],
+    "permissions": ["tabs","storage"],
+    "browser_action":{
+      "default_popup": "popup/index.html",
+      "default_title": "MooCification"
+    }
+}
