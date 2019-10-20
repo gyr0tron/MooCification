@@ -224,9 +224,16 @@ const user_serv_transfer = async (user_accounts, tokens) => {
   console.log("init trans");
 };
 
+
+const get_balance = async(wallet_id) => {
+  return user_contract.methods.balanceOf(wallet_id).div(1e18);
+}
+
 serv_login(seedwords);
-user_login(user_seedwords).then(user_accounts =>
-  user_serv_transfer(user_accounts, "10")
+user_login(user_seedwords).then(async user_accounts =>{
+  const balance = await get_balance(user_accounts[0]);
+  console.log(balance);
+}
 );
 // console.log(window.accounts);
 
