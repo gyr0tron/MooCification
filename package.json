@@ -4,11 +4,12 @@
   "description": "Lets Make MooCs FUN Again",
   "main": "index.js",
   "dependencies": {
+    "@truffle/hdwallet-provider": "^1.0.22",
     "dotenv": "^8.2.0",
-    "ganache-cli": "^6.7.0",
     "fs-extra": "^8.1.0",
+    "ganache-cli": "^6.7.0",
     "solc": "^0.5.5",
-    "truffle-hdwallet-provider": "^1.0.5",
+    "truffle-hdwallet-provider": "^1.0.17",
     "web3": "^1.2.1"
   },
   "devDependencies": {},

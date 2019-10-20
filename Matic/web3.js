@@ -1,7 +1,7 @@
-import Web3 from "web3";
-import keys from "./../.env";
+const Web3 = require('web3')
+const keys = require('../.env')
 
-let web3;
+let web3
 
 if (typeof window !== "undefined" && window.web3 !== "undefined") {
   //on browser is metamask
@@ -12,4 +12,4 @@ if (typeof window !== "undefined" && window.web3 !== "undefined") {
   web3 = new Web3(provider);
 }
 
-export default web3;
+module.exports = {web3}

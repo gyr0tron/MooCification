@@ -1,10 +1,10 @@
-import web3 from "./web3";
-import compiledGenerator from "./build/MoocToken.json";
-import keys from "../.env";
+const web3 = require('web3')
+const compiledGenerator = require('./build/MoocToken.json')
+const keys = require('../.env')
 
 const abi = compiledGenerator.abi;
 const bytecode = compiledGenerator.evm.bytecode.object;
 
 const instance = new web3.eth.Contract(abi, keys.ADDRESS);
 
-export default instance;
+module.exports = {instance}

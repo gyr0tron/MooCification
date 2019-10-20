@@ -1,6 +1,8 @@
-import web3 from "./web3";
-import MoocToken from "./build/MoocToken.json";
+const web3 = require('./web3')
+const MoocToken = require('./build/MoocToken.json')
 
-export default address => {
+const mooccoin = address => {
   return new web3.eth.Contract(MoocToken.abi, address);
 };
+
+module.exports = {mooccoin}

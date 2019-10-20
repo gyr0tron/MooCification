@@ -1,19 +1,60 @@
 <html>
     <head>
         <title>Create Room</title>
+        <style>
+            #createRoom{
+                display: block;
+                text-align: center;
+                border: 1px solid #119922;
+                color: #119922;
+                margin: 10px 0;
+                cursor: pointer;
+                font-size: 20px;
+                border-radius: 30px;
+                padding: 5px 0;
+                max-height: 30px;
+                transition: all .2s linear;
+            }
+            #createRoom:hover{
+                background: #119922;
+                color: #fff;
+            }
+            input{
+                height: 30px;
+                border-radius: 30px;
+                border: 1px solid #111;
+                font-size: 20px;
+                padding: 10px 5px;
+                width: 250px;
+                margin-bottom: 5px;
+                display: inline-block;
+            }
+            input:focus{
+                outline: none;
+            }
+            label{
+                text-align: center;
+                font-size: 15px;
+                margin-top: 5px;
+                display: block;
+            }
+            form{
+                margin: 20px 20px;
+            }
+        </style>
     </head>
     <body>
         <form>
             <label for="name">Name:</label>
-            <input type="text" class="roomName">
+            <input type="text" class="getRoomName">
 
             <label for="date">Date:</label>
-            <input type="text" class="roomDate">
+            <input type="text" class="getRoomDate">
 
             <label for="amount">Amount:</label>
-            <input type="text" class="roomAmount">
+            <input type="text" class="getRoomAmount">
 
-            <button id="createRoom">Submit</button>
+            <div id="createRoom">Submit</div>
         </form>
         <script src="handleForm.js"></script>
     </body>

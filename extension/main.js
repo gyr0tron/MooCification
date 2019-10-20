@@ -149,8 +149,8 @@ const abi = [
   }
 ];
 
-// ADDRESS
-const address = "0x09e68b6bd407612a3c7141f1a79a6eb621ac6e93";
+// CONTRACT ADDRESS
+const address = '0x09e68b6bd407612a3c7141f1a79a6eb621ac6e93'
 
 // ACCOUNTS
 window.accounts;

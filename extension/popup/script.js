@@ -6,6 +6,13 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         const room = document.createElement("div")
         room.textContent = response.progress ? response.progress : "Nil"
         room.textContent += tabs[0].url.split("/")[4]
+
+        // Check if course completed or not
+        // Only for Udemy this applies - KLUDGE
+        if(response.progress){
+            const status = response.progress.split(" ")[0] === response.progress.split(" ")[2] ? true : false 
+        }
+        
         roomsContainer.appendChild(room)
     })
 })
