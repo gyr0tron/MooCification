@@ -61,7 +61,26 @@ completeRoomButton.addEventListener("click", () => {
     const url = setCourseURL.textContent
     console.log(url)
     chrome.tabs.update({url:url}, function(tab) {
-        setTimeout(() => chrome.storage.local.get("progress", (val) => console.log(val)),2000)
+        chrome.storage.local.get(['progress'],(data) => {
+            if(response.progress){
+                const status = response.progress.split(" ")[0] === response.progress.split(" ")[2] ? true : false 
+            }
+            if(status){
+                const roomNumber = joinRoom.value
+                const url = `http://localhost:3001/api/completion`
+                fetch(url,{
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({user_id: accounts, room_no: roomNumber})
+                })
+                .then(data => data.json())
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
+            }
+        })
     })
 })
 
