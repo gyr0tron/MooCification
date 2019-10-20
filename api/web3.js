@@ -152,22 +152,22 @@ const abi = [
 // ADDRESS
 const address = "0x09e68b6bd407612a3c7141f1a79a6eb621ac6e93";
 
-const seedwords = "ranch hospital false mirror despair expose enable control consider security cute defy";
-
+const seedwords =
+  "ranch hospital false mirror despair expose enable control consider security cute defy";
 
 let account;
 let contract;
 
 const serv_user_transfer = async (user_account, tokens) => {
-    console.log(contract);
-    console.log(user_accounts);
-    await contract.methods.transfer(user_accounts, tokens).send({
-      from: account
-    });
-    console.log("done transaction");
+  console.log(contract);
+  console.log(user_account);
+  await contract.methods.transfer(user_account, tokens).send({
+    from: account
+  });
+  console.log("done transaction");
 };
 
-const login = async() => {
+const login = async () => {
   const provider = new HDWalletProvider(
     seedwords,
     "https://testnet2.matic.network"
@@ -175,12 +175,12 @@ const login = async() => {
   web3 = new Web3(provider);
   contract = new web3.eth.Contract(abi, address);
   contract.options.gasPrice = "0";
-  accounts = await user_web3.eth.getAccounts();
+  accounts = await web3.eth.getAccounts();
   console.log("server logged in", accounts);
   account = accounts[0];
 };
 
-module.exports = {serv_user_transfer,login};
+module.exports = { serv_user_transfer, login };
 // console.log(window.accounts);
 
 //sinit_transfer();
