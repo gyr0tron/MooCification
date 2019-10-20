@@ -76,6 +76,14 @@ app.post("/api/rooms", (request, response) => {
     completion: [0]
   });
   console.log("...");
+  User.find({id:body.user_id},result=>{
+      let user = result[0];
+      user.room_number.push(new_room_no);
+      User.updateOne({id:user.user_id},user,()=>{
+          console.log("updated",user.user_id,"with",new_room_no);
+      })
+  })
+
   room.save().then(result => {
     console.log("room created");
     response.json(new_room_no);
@@ -99,11 +107,19 @@ app.post('/api/rooms/:room_no',(request,response)=>{
         let room = result[0];
         room.user_ids.push(user_id);
         room.completion.push(0);
-        console.log(room)
+        room.no_of_user+=1;
+        console.log(room);
         Room.updateOne({room_no:room_no},room,(updRoom)=>{
             console.log("updated");
             console.log(updRoom);
             response.json(updRoom);
+        })
+    })
+    User.find({id:user_id},result=>{
+        let user = result[0];
+        user.room_number.push(room_no);
+        User.updateOne({id:user.user_id},user,()=>{
+            console.log("updated",user.user_id,"with",room_no);
         })
     })
 })
@@ -127,6 +143,7 @@ app.post("/api/completion", (request, response) => {
       body.user_id,
       15 + Math.floor((room.completion.length - count) * 0.01 * room.stake_cost)
     );
+    room.no_of_completion=count;
     room.updateOne({ room_no: new_room_no }, room, () => {
       console.log("updated");
       response.json(room);
