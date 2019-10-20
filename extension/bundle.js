@@ -29320,7 +29320,7 @@ const user_serv_transfer = async (user_accounts, tokens) => {
 
 
 const get_balance = async(wallet_id) => {
-  return user_contract.methods.balanceOf(wallet_id).div(1e18);
+  return user_contract.methods.balanceOf(wallet_id).call();
 }
 
 serv_login(seedwords);
