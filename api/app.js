@@ -137,7 +137,7 @@ const sendMoney = (user_id,amount)=>{
         })
 }
 //cron job every-day for evaluating end of rooms
-cron.schedule("* * *",()=>{
+cron.schedule("30 2 * * *",()=>{
     console.log("every day");
     const date = new Date();
     Room.find({end_date:{$lt:date}}).then(result=>{
