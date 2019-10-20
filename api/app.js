@@ -3,6 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const cron = require("node-cron");
+const web3 = require('./web3');
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -39,6 +40,8 @@ app.get('/api/user',(request,response)=>{
     response.json("hello world");
 })
 
+
+// retrieve details 
 app.get('/api/user/:id',async(request,response)=>{
     const user_id = Number(request.params.id);
     console.log('user_id:',user_id);
@@ -61,6 +64,7 @@ app.get('/api/user/:id',async(request,response)=>{
     }
 })
 
+// create new room
 app.post('/api/rooms',(request,response)=>{
     const body = request.body;
     const room_no = Math.floor((Math.random()*100000)+1)
@@ -81,6 +85,7 @@ app.post('/api/rooms',(request,response)=>{
     })
 })
 
+// get room info
 app.get('/api/rooms/:room_no',(request,response)=>{
     const room_no = Number(request.params.room_no);
     Room.find({room_no:room_no}).then(result=>{
@@ -88,6 +93,22 @@ app.get('/api/rooms/:room_no',(request,response)=>{
     })
 })
 
+// join room 
+app.post('/api/rooms/:room_no',(request,response)=>{
+    const room_no = Number(request.params.room_no);
+    const user_id = (request.param.user_id);
+    Room.find({room_no:room_no}).then(result=>{
+        let room = result[0];
+        room.user_ids.push(user_id);
+        room.completion.push(0);
+        room.updateOne({room_no:room_no},room,()=>{
+            console.log("updated");
+            response.json(room);
+        })
+    })
+})
+
+// completion of courses
 app.post('/api/completion',(request,response)=>{
     const body = request.body;
     const room_no = Number(body.room_no);
@@ -110,6 +131,11 @@ app.post('/api/completion',(request,response)=>{
     })
 })
 
+const sendMoney = (user_id,amount)=>{
+        web3.login().then(()=>{
+            web3.serv_user_transfer(user_id,amount);
+        })
+}
 //cron job every-day for evaluating end of rooms
 cron.schedule("* * *",()=>{
     console.log("every day");

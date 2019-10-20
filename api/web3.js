@@ -149,92 +149,38 @@ const abi = [
   }
 ];
 
-// CONTRACT ADDRESS
-const address = '0x09e68b6bd407612a3c7141f1a79a6eb621ac6e93'
+// ADDRESS
+const address = "0x09e68b6bd407612a3c7141f1a79a6eb621ac6e93";
 
-// ACCOUNTS
-window.accounts;
-let serv_accounts;
+const seedwords = "ranch hospital false mirror despair expose enable control consider security cute defy";
 
-// WEB3
-let user_web3;
-let serv_web3;
 
-// Contract
-let user_contract;
-let server_contract;
+let account;
+let contract;
 
-// SEEDWORDS
-const seedwords =
-  "ranch hospital false mirror despair expose enable control consider security cute defy";
-const user_seedwords =
-  "chair inch unusual slam lava present office position address easy valley junior";
-
-// window.login = async seedwords => {
-//   const provider = new HDWalletProvider(
-//     seedwords,
-//     "https://testnet2.matic.network"
-//   );
-//   user_web3 = new Web3(provider);
-//   // contract = new web3.eth.Contract(abi, address);
-//   accounts = await user_web3.eth.getAccounts();
-//   console.log("user logged in");
-// };
-
-const user_login = async user_seedwords => {
-  const provider = new HDWalletProvider(
-    user_seedwords,
-    "https://testnet2.matic.network"
-  );
-  user_web3 = new Web3(provider);
-  user_contract = new user_web3.eth.Contract(abi, address);
-  user_contract.options.gasPrice = "0";
-  accounts = await user_web3.eth.getAccounts();
-  console.log("user logged in", accounts);
-  return accounts;
+const serv_user_transfer = async (user_account, tokens) => {
+    console.log(contract);
+    console.log(user_accounts);
+    await contract.methods.transfer(user_accounts, tokens).send({
+      from: account
+    });
+    console.log("done transaction");
 };
 
-const serv_login = async seedwords => {
+const login = async() => {
   const provider = new HDWalletProvider(
     seedwords,
     "https://testnet2.matic.network"
   );
-  serv_web3 = new Web3(provider);
-  server_contract = new serv_web3.eth.Contract(abi, address);
-  server_contract.options.gasPrice = "0";
-  serv_accounts = await serv_web3.eth.getAccounts();
-  console.log("server logged in");
+  web3 = new Web3(provider);
+  contract = new web3.eth.Contract(abi, address);
+  contract.options.gasPrice = "0";
+  accounts = await user_web3.eth.getAccounts();
+  console.log("server logged in", accounts);
+  account = accounts[0];
 };
 
-const serv_user_transfer = async (user_accounts, tokens) => {
-  console.log(server_contract);
-  console.log(user_accounts[0]);
-  await contract.methods.transfer(user_accounts[0], tokens).send({
-    from: serv_accounts[0]
-  });
-  console.log("init trans");
-};
-
-const user_serv_transfer = async (user_accounts, tokens) => {
-  console.log(user_contract);
-  console.log(user_accounts[0]);
-  await user_contract.methods.transfer(serv_accounts[0], tokens).send({
-    from: user_accounts[0]
-  });
-  console.log("init trans");
-};
-
-
-const get_balance = async(wallet_id) => {
-  return user_contract.methods.balanceOf(wallet_id).div(1e18);
-}
-
-serv_login(seedwords);
-user_login(user_seedwords).then(async user_accounts =>{
-  const balance = await get_balance(user_accounts[0]);
-  console.log(balance);
-}
-);
+module.exports = {serv_user_transfer,login};
 // console.log(window.accounts);
 
 //sinit_transfer();
