@@ -10,12 +10,16 @@ setTimeout(() => {
     const udemyTrack = document.querySelectorAll('[data-purpose="progress-popover-text"]')[0]
     console.log(udemyTrack)
 
-    chrome.runtime.onMessage.addListener((response,sender,sendResponse) => {
-        if(response.getProgress){
-            // Cannot add setTimeout inside since port closes before the timeout
-            sendResponse({progress: udemyTrack.textContent})
-        }
-    })
+    // chrome.runtime.onMessage.addListener((response,sender,sendResponse) => {
+    //     if(response.getProgress){
+    //         // Cannot add setTimeout inside since port closes before the timeout
+    //         sendResponse({progress: udemyTrack.textContent})
+    //     }
+    // })
+
+    console.log(chrome.storage.local)
+    console.log(chrome.storage.sync)
+    chrome.storage.local.set("progress",udemyTrack.textContent)
 }, 2000)
 
 

@@ -8,6 +8,7 @@ const setCourseURL = document.getElementById("setCourseURL")
 const getRoomDataButton = document.getElementById("getRoomDataButton")
 const joinRoom = document.getElementsByClassName("joinRoom")[0]
 const joinRoomButton = document.getElementById("joinRoomButton")
+const completeRoomButton = document.getElementById("completeRoomButton")
 
 const accounts = localStorage.getItem("accounts").slice(1,localStorage.getItem("accounts").length-1)
 
@@ -30,8 +31,12 @@ getRoomDataButton.addEventListener("click",(e) => {
         setNoOfCompletions.textContent = `No Of Completions- ${count}`
         setStakes.textContent = `Stakes- ${res.stake_cost}`
         setEndDate.textContent = `Room end date- ${res.end_date}`
-        setCourseURL.textContent = `Course URL - ${res.course_url}`
-        joinRoomButton.style.display = "block"
+        setCourseURL.textContent = `${res.course_url}`
+        if(res.user_ids.indexOf(accounts) > 1){
+            completeRoomButton.style.display = "block"
+        }else{
+            joinRoomButton.style.display = "block"
+        }
     })
     .catch((err) => console.log(err))
 })
@@ -43,12 +48,20 @@ joinRoomButton.addEventListener("click", () => {
     fetch(URL,{
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({user_id: accounts})
-      })
+    })
     .then(data => data.json())
     .then(res => console.log(res))
+})
+
+completeRoomButton.addEventListener("click", () => {
+    const url = setCourseURL.textContent
+    console.log(url)
+    chrome.tabs.update({url:url}, function(tab) {
+        setTimeout(() => chrome.storage.local.get("progress", (val) => console.log(val)),2000)
+    })
 })
 
