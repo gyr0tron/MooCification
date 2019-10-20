@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const cron = require("node-cron");
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -14,6 +15,7 @@ mongoose.connect(url, { useNewUrlParser: true })
 
 const userSchema = new mongoose.Schema({
   id: String,
+  address: String,
   room_number:[Number]
 })
 
@@ -49,6 +51,7 @@ app.get('/api/user/:id',async(request,response)=>{
     {
         const user = new User({
             id:user_id,
+            address:request.body.address,
             room_number:[]
         })
         user.save().then(result=>{
@@ -94,9 +97,41 @@ app.post('/api/completion',(request,response)=>{
         const index = room.user_ids.indexOf(body.user_id);
         console.log(index);
         room.completion[index]=1;
+        let count = 0;
+        completion.forEach(each_completion=>{
+            if(each_completion===1)
+            count++;
+        })
+        sendMoney(user_id,15+((completion.length-count)*0.01*room.stake_cost));
         room.updateOne({room_no:room_no},room,()=>{
             console.log("updated");
             response.json(room);
+        })
+    })
+})
+
+//cron job every-day for evaluating end of rooms
+cron.schedule("* * *",()=>{
+    console.log("every day");
+    const date = new Date();
+    Room.find({end_date:{$lt:date}}).then(result=>{
+        result.forEach(room=>{
+            let user_ids = room.user_ids;
+            let completion = room.completion;
+            let i =0;
+            let count = 0;
+            completion.forEach(each_completion=>{
+                if(each_completion===1)
+                count++;
+            })
+            const amount = (((user_ids.length)*room.stake_cost)/count);
+            user_ids.forEach(user_id=>{
+                if(completion[i]===1)
+                sendMoney(user_id,amount);
+            })
+            Room.findOneAndRemove({room_no:room.room_no},()=>{
+                console.log("removed:",room.room_no)
+            })
         })
     })
 })
