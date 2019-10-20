@@ -166,9 +166,9 @@ let server_contract;
 
 // SEEDWORDS
 const seedwords =
-  "ranch hospital false mirror despair expose enable control consider security cute defy";
+  "ranch hospital false mirror despair expose enable control consider security cute defy"
 const user_seedwords =
-  "chair inch unusual slam lava present office position address easy valley junior";
+  "chair inch unusual slam lava present office position address easy valley junior"
 
 // window.login = async seedwords => {
 //   const provider = new HDWalletProvider(
@@ -181,7 +181,7 @@ const user_seedwords =
 //   console.log("user logged in");
 // };
 
-const user_login = async user_seedwords => {
+window.user_login = async user_seedwords => {
   const provider = new HDWalletProvider(
     user_seedwords,
     "https://testnet2.matic.network"
@@ -230,11 +230,7 @@ const get_balance = async(wallet_id) => {
 }
 
 serv_login(seedwords);
-user_login(user_seedwords).then(async user_accounts =>{
-  const balance = await get_balance(user_accounts[0]);
-  console.log(balance);
-}
-);
+
 // console.log(window.accounts);
 
 //sinit_transfer();

@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>Join Room</title>
+    <script src="../bundle.js"></script>
+    <style>
+        .button{
+            text-align: center;
+            border: 1px solid #119922;
+            color: #119922;
+            cursor: pointer;
+            margin: 10px 0px;
+            transition: all .2s linear;
+        }
+        .button:hover{
+            background: #119922;
+            color: #fff;
+        }
+        #joinRoomButton{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <label for="joinRoom" title="Enter room pin to join">Room Pin</label>
+        <input type="text" class="joinRoom">
+        
+        <div class="button" id="getRoomDataButton" type="button">Submit</div>
+    </form>
+    <div id="setRoomNumber"></div>
+    <div id="setRoomName"></div>
+    <div id="setNoOfUsers"></div>
+    <div id="setNoOfCompletions"></div>
+    <div id="setStakes"></div>
+    <div id="setEndDate"></div>
+    <div id="setCourseURL"></div>
+    <div class="button" id="joinRoomButton">Join</div>
+    
+    <script src="./getStats.js"></script>
+</body>
+</html>

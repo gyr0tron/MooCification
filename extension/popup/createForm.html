@@ -41,20 +41,27 @@
             form{
                 margin: 20px 20px;
             }
+            .getRoomNo{
+                font-size: 30px;
+                font-weight: bold;
+                text-align: center;
+            }
         </style>
+        <script src="../bundle.js"></script>
     </head>
     <body>
         <form>
             <label for="name">Name:</label>
             <input type="text" class="getRoomName">
 
-            <label for="date">Date:</label>
-            <input type="text" class="getRoomDate">
+            <label for="date">End Date:</label>
+            <input type="date" class="getRoomDate">
 
             <label for="amount">Amount:</label>
             <input type="text" class="getRoomAmount">
 
             <div id="createRoom">Submit</div>
+            <div class="getRoomNo"></div>
         </form>
         <script src="handleForm.js"></script>
     </body>

@@ -5,6 +5,7 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.sendMessage(tabs[0].id, {getProgress: true}, function(response) {
         const room = document.createElement("div")
         room.textContent = response.progress ? response.progress : "Nil"
+        currURL = tabs[0].url
         room.textContent += tabs[0].url.split("/")[4]
 
         // Check if course completed or not

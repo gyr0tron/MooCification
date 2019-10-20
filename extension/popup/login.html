@@ -3,54 +3,40 @@
         <title>Login</title>
         <script src="../bundle.js"></script>
         <style>
-            html{
+            *{
                 box-sizing: border-box;
+                font-size: 15px;
             }
-            #getLogin{
-                display: block;
+            
+            .button{
                 text-align: center;
                 border: 1px solid #119922;
                 color: #119922;
-                margin: 10px 0;
                 cursor: pointer;
-                font-size: 20px;
-                padding: 5px 0;
-                border-radius: 30px;
+                margin: 10px 0px;
                 transition: all .2s linear;
             }
-            #getLogin:hover{
+            .button:hover{
                 background: #119922;
                 color: #fff;
             }
-            input{
-                height: 30px;
-                border-radius: 30px;
-                border: 1px solid #111;
-                font-size: 20px;
-                padding: 10px 5px;
-                width: 250px;
-                margin-bottom: 5px;
-                display: inline-block;
-            }
-            input:focus{
-                outline: none;
-            }
+
             label{
-                text-align: center;
-                font-size: 15px;
-                margin-top: 5px;
+                font-weight: bold;
                 display: block;
+                margin-bottom: 5px;
             }
+
             form{
-                margin: 20px 20px;
+                margin: 20px;
             }
         </style>
     </head>
     <body>
         <form action="">
-            <label for="seedwords"></label>
-            <textarea class="getSeedword" rows="5"></textarea>
-            <div id="getLogin">Login</div>
+            <label for="seedwords" title="Use these to login to your truffle HD wallet">Seed-Words</label>
+            <textarea class="textarea getSeedword" rows="5"></textarea>
+            <div class="button" id="getLogin">Login</div>
         </form>
         <script src="./login.js"></script>
     </body>

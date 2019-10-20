@@ -95,15 +95,18 @@ app.get('/api/rooms/:room_no',(request,response)=>{
 
 // join room 
 app.post('/api/rooms/:room_no',(request,response)=>{
+    console.log(request.body)
     const room_no = Number(request.params.room_no);
-    const user_id = (request.param.user_id);
+    const user_id = (request.body.user_id);
     Room.find({room_no:room_no}).then(result=>{
         let room = result[0];
         room.user_ids.push(user_id);
         room.completion.push(0);
-        room.updateOne({room_no:room_no},room,()=>{
+        console.log(room)
+        Room.updateOne({room_no:room_no},room,(updRoom)=>{
             console.log("updated");
-            response.json(room);
+            console.log(updRoom);
+            response.json(updRoom);
         })
     })
 })
@@ -137,7 +140,7 @@ const sendMoney = (user_id,amount)=>{
         })
 }
 //cron job every-day for evaluating end of rooms
-cron.schedule("* * *",()=>{
+cron.schedule("30 2 * * *",()=>{
     console.log("every day");
     const date = new Date();
     Room.find({end_date:{$lt:date}}).then(result=>{
