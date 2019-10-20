@@ -123,7 +123,7 @@ app.post('/api/completion',(request,response)=>{
             if(each_completion===1)
             count++;
         })
-        sendMoney(user_id,15+((completion.length-count)*0.01*room.stake_cost));
+        sendMoney(user_id,15+Math.floor((completion.length-count)*0.01*room.stake_cost));
         room.updateOne({room_no:room_no},room,()=>{
             console.log("updated");
             response.json(room);
