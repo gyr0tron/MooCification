@@ -42,20 +42,19 @@ app.get("/api/user", (request, response) => {
 
 // retrieve details
 app.get("/api/user/:id", async (request, response) => {
-  const user_id = Number(request.params.id);
+  const user_id = request.params.id
   console.log("user_id:", user_id);
   const user = await User.find({ id: user_id });
   if (user.length !== 0) {
-    response.json(user[0].id);
+    response.json(user[0]);
   } else {
     const user = new User({
       id: user_id,
-      address: request.body.address,
       room_number: []
     });
     user.save().then(result => {
       console.log("added");
-      response.json(user_id);
+      response.json(result);
     });
   }
 });
